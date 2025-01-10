@@ -161,14 +161,14 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
             {
                 throw new ArgumentNullException();
             }
-            _currentEquipment = newEquipment;
+            CurrentEquipment = newEquipment;
         }
         /// <summary>
         /// Desequipe l'objet en cours au personnage
         /// </summary>
         public void Unequip()
         {
-            _currentEquipment = null;
+            CurrentEquipment = null;
         }
 
     }
