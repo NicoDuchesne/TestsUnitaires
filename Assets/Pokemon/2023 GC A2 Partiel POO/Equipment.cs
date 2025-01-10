@@ -6,15 +6,35 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
     /// </summary>
     public class Equipment
     {
+        /// <summary>
+        /// Vie bonus
+        /// </summary>
+        int _bonusHealth;
+        /// <summary>
+        /// Atatque bonus
+        /// </summary>
+        int _bonusAttack;
+        /// <summary>
+        /// Defense bonus
+        /// </summary>
+        int _bonusDefense;
+        /// <summary>
+        /// Vitesse bonus
+        /// </summary>
+        int _bonusSpeed;
+
         public Equipment(int bonusHealth, int bonusAttack, int bonusDefense, int bonusSpeed)
         {
-            
+            _bonusHealth = bonusHealth;
+            _bonusAttack = bonusAttack;
+            _bonusDefense = bonusDefense;
+            _bonusSpeed = bonusSpeed;
         }
 
-        public int BonusHealth { get; protected set; }
-        public int BonusAttack { get; protected set; }
-        public int BonusDefense { get; protected set; }
-        public int BonusSpeed { get; protected set; }
+        public int BonusHealth { get => _bonusHealth; protected set => _bonusHealth = value; }
+        public int BonusAttack { get => _bonusAttack; protected set => _bonusAttack = value; }
+        public int BonusDefense { get => _bonusDefense; protected set => _bonusDefense = value; }
+        public int BonusSpeed { get => _bonusSpeed; protected set => _bonusSpeed = value; }
 
     }
 }
