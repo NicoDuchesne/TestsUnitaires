@@ -142,6 +142,10 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// <exception cref="ArgumentNullException">Si equipement est null</exception>
         public void Equip(Equipment newEquipment)
         {
+            if(newEquipment == null)
+            {
+                throw new ArgumentNullException();
+            }
             _currentEquipment = newEquipment;
         }
         /// <summary>
