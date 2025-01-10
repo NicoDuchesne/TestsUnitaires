@@ -53,7 +53,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// <summary>
         /// HP actuel du personnage
         /// </summary>
-        public int CurrentHealth { 
+        public int CurrentHealth {
             get => _currentHealth;
             private set
             {
@@ -62,9 +62,10 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
                 {
                     _currentHealth = 0;
                 }
+                CheckOverHealth();
             }
         }
-        public TYPE BaseType { get => _baseType;}
+        public TYPE BaseType { get => _baseType; }
         /// <summary>
         /// HPMax, prendre en compte base et equipement potentiel
         /// </summary>
@@ -137,14 +138,22 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         public bool IsAlive => _currentHealth > 0;
         public bool IsEquiped => _currentEquipment != null;
 
-        /// <summary>
-        /// Application d'un skill contre le personnage
-        /// On pourrait potentiellement avoir besoin de connaitre le personnage attaquant,
-        /// Vous pouvez adapter au besoin
-        /// </summary>
-        /// <param name="s">skill attaquant</param>
-        /// <exception cref="NotImplementedException"></exception>
-        public void ReceiveAttack(Skill s)
+        public void CheckOverHealth()
+        {
+            if (CurrentHealth > MaxHealth)
+            {
+                CurrentHealth = MaxHealth;
+            }
+        }
+
+    /// <summary>
+    /// Application d'un skill contre le personnage
+    /// On pourrait potentiellement avoir besoin de connaitre le personnage attaquant,
+    /// Vous pouvez adapter au besoin
+    /// </summary>
+    /// <param name="s">skill attaquant</param>
+    /// <exception cref="NotImplementedException"></exception>
+    public void ReceiveAttack(Skill s)
         {
             int skillDamage = s.Power - Defense;
             CurrentHealth = CurrentHealth - skillDamage;
@@ -169,7 +178,18 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         public void Unequip()
         {
             CurrentEquipment = null;
+            CheckOverHealth();
         }
+
+        public void Heal(int healing)
+        {
+            CurrentHealth = CurrentHealth + healing;
+        }
+
+        // - Ajouter davantage de sécurité sur les tests apportés
+        // - un heal ne régénère pas plus que les HP Max
+        // - si on abaisse les HPMax les HP courant doivent suivre si c'est au dessus de la nouvelle valeur
+        // - ajouter un equipement qui rend les attaques prioritaires puis l'enlever et voir que l'attaque n'est plus prioritaire etc)
 
     }
 }
