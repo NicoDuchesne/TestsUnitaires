@@ -27,6 +27,10 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// Type de base
         /// </summary>
         TYPE _baseType;
+        /// <summary>
+        /// Vie actuelle
+        /// </summary>
+        int _currentHealth;
 
         public Character(int baseHealth, int baseAttack, int baseDefense, int baseSpeed, TYPE baseType)
         {
@@ -35,11 +39,13 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
             _baseDefense = baseDefense;
             _baseSpeed = baseSpeed;
             _baseType = baseType;
+            _currentHealth = baseHealth;
         }
+
         /// <summary>
         /// HP actuel du personnage
         /// </summary>
-        public int CurrentHealth { get; private set; }
+        public int CurrentHealth { get => _currentHealth; private set => _currentHealth = value; }
         public TYPE BaseType { get => _baseType;}
         /// <summary>
         /// HPMax, prendre en compte base et equipement potentiel
@@ -48,7 +54,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
-                throw new NotImplementedException();
+                return _baseHealth;
             }
         }
         /// <summary>
@@ -58,7 +64,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
-                throw new NotImplementedException();
+                return _baseAttack;
             }
         }
         /// <summary>
@@ -68,7 +74,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
-                throw new NotImplementedException();
+                return _baseDefense;
             }
         }
         /// <summary>
@@ -78,7 +84,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
-                throw new NotImplementedException();
+                return _baseSpeed;
             }
         }
         /// <summary>
