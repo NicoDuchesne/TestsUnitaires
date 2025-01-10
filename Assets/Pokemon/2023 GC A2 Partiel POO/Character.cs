@@ -35,6 +35,10 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// Vie actuelle
         /// </summary>
         Equipment _currentEquipment;
+        /// <summary>
+        /// Effet actuel
+        /// </summary>
+        StatusEffect _currentStatus;
 
         public Character(int baseHealth, int baseAttack, int baseDefense, int baseSpeed, TYPE baseType)
         {
@@ -49,7 +53,17 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// <summary>
         /// HP actuel du personnage
         /// </summary>
-        public int CurrentHealth { get => _currentHealth; private set => _currentHealth = value; }
+        public int CurrentHealth { 
+            get => _currentHealth;
+            private set
+            {
+                _currentHealth = value;
+                if (_currentHealth < 0)
+                {
+                    _currentHealth = 0;
+                }
+            }
+        }
         public TYPE BaseType { get => _baseType;}
         /// <summary>
         /// HPMax, prendre en compte base et equipement potentiel
@@ -118,11 +132,10 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// <summary>
         /// null si pas de status
         /// </summary>
-        public StatusEffect CurrentStatus { get; private set; }
+        public StatusEffect CurrentStatus { get => _currentStatus; private set => _currentStatus = value; }
 
-        public bool IsAlive => throw new NotImplementedException();
+        public bool IsAlive => _currentHealth > 0;
         public bool IsEquiped => _currentEquipment != null;
-
 
         /// <summary>
         /// Application d'un skill contre le personnage
@@ -133,7 +146,9 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// <exception cref="NotImplementedException"></exception>
         public void ReceiveAttack(Skill s)
         {
-            throw new NotImplementedException();
+            int skillDamage = s.Power - Defense;
+            CurrentHealth = CurrentHealth - skillDamage;
+            CurrentStatus = StatusEffect.GetNewStatusEffect(s.Status);
         }
         /// <summary>
         /// Equipe un objet au personnage
