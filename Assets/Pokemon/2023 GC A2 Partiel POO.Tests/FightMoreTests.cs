@@ -44,5 +44,39 @@ namespace _2023_GC_A2_Partiel_POO.Tests.Level_2
             pikachu.Unequip();
             Assert.That(pikachu.CurrentHealth, Is.EqualTo(100));
         }
+
+        [Test]
+        public void TestRazorClawEffect()
+        {
+            //Dans pokemon Razor Claw est un equipement qui permet d'attaquer en premier
+            Character pikachu = new Character(100, 50, 30, 20, TYPE.NORMAL);
+            Character mewtwo = new Character(100, 50, 30, 200, TYPE.NORMAL);
+
+            //0 speed equipment but RazorClaw Special effect
+            Equipment razorClaw = new Equipment(100, 90, 70, 0, SpecialEffect.RAZORCLAW);
+            pikachu.Equip(razorClaw);
+
+            //First Fight
+            Fight f = new Fight(pikachu, mewtwo);
+            MegaPunch mp = new MegaPunch();
+            f.ExecuteTurn(mp, mp);
+
+            //Pikachu wins thanks to razorClaw 
+            Assert.That(pikachu.IsAlive, Is.EqualTo(true));
+            Assert.That(mewtwo.IsAlive, Is.EqualTo(false));
+            Assert.That(f.IsFightFinished, Is.EqualTo(true));
+
+            ////Second Fight but no razorClaw for pikachu
+            mewtwo.Heal(1000);
+            pikachu.Unequip();
+            f = new Fight(pikachu, mewtwo);
+            f.ExecuteTurn(mp, mp);
+
+            ////This Time Pikachu looses
+            Assert.That(pikachu.IsAlive, Is.EqualTo(false));
+            Assert.That(mewtwo.IsAlive, Is.EqualTo(true));
+            Assert.That(f.IsFightFinished, Is.EqualTo(true));
+
+        }
     }
 }

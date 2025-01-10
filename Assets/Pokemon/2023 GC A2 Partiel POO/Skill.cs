@@ -4,6 +4,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
     /// <summary>
     /// Définition abstraite d'une compétence.
     /// </summary>
+
     public abstract class Skill
     {
         /// <summary>

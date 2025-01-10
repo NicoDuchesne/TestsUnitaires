@@ -1,5 +1,7 @@
 ﻿
 using System;
+using System.Diagnostics;
+using UnityEditor.Experimental.GraphView;
 
 namespace _2023_GC_A2_Partiel_POO.Level_2
 {
@@ -33,24 +35,73 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// <summary>
         /// Jouer l'enchainement des attaques. Attention à bien gérer l'ordre des attaques par apport à la speed des personnages
         /// </summary>
-        /// <param name="skillFromCharacter1">L'attaque selectionné par le joueur 1</param>
-        /// <param name="skillFromCharacter2">L'attaque selectionné par le joueur 2</param>
+        /// <param name="s1">L'attaque selectionné par le joueur 1</param>
+        /// <param name="s2">L'attaque selectionné par le joueur 2</param>
         /// <exception cref="ArgumentNullException">si une des deux attaques est null</exception>
-        public void ExecuteTurn(Skill skillFromCharacter1, Skill skillFromCharacter2)
+        public void ExecuteTurn(Skill s1, Skill s2)
         {
-            if(_character1.Speed >= _character2.Speed)
+            bool Char1Priority = false;
+            bool Char2Priority = false;
+
+            if (Character1.IsEquiped)
             {
-                _character2.ReceiveAttack(skillFromCharacter1);
-                if (IsFightFinished) return;
-                _character1.ReceiveAttack(skillFromCharacter2);
+                if (Character1.CurrentEquipment.SpecialEffect == SpecialEffect.RAZORCLAW)
+                {
+                    Char1Priority = true;
+                }
+            }
+
+            if (Character2.IsEquiped)
+            {
+                if (Character2.CurrentEquipment.SpecialEffect == SpecialEffect.RAZORCLAW)
+                {
+                    Char2Priority = true;
+                }
+            }
+
+
+            if (Char1Priority && !Char2Priority)
+            {
+                Char1First(s1, s2);
+            } else if (!Char1Priority && Char2Priority)
+            {
+                Char2First(s1, s2);
             } else
             {
-                _character1.ReceiveAttack(skillFromCharacter2);
-                if (IsFightFinished) return;
-                _character2.ReceiveAttack(skillFromCharacter1);
+                NormalTurn(s1, s2);
+            }
+
+        }
+
+        private void NormalTurn(Skill s1, Skill s2)
+        {
+            if (_character1.Speed >= _character2.Speed)
+            {
+                Char1First(s1, s2);
+            }
+            else
+            {
+                Char2First(s1, s2);
             }
             if (IsFightFinished) return;
         }
+
+        private void Char1First(Skill s1, Skill s2)
+        {
+            _character2.ReceiveAttack(s1);
+            if (IsFightFinished) return;
+            _character1.ReceiveAttack(s2);
+            if (IsFightFinished) return;
+        }
+
+        private void Char2First(Skill s1, Skill s2)
+        {
+            _character1.ReceiveAttack(s2);
+            if (IsFightFinished) return;
+            _character2.ReceiveAttack(s1);
+            if (IsFightFinished) return;
+        }
+
 
     }
 }
