@@ -31,6 +31,10 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// Vie actuelle
         /// </summary>
         int _currentHealth;
+        /// <summary>
+        /// Vie actuelle
+        /// </summary>
+        Equipment _currentEquipment;
 
         public Character(int baseHealth, int baseAttack, int baseDefense, int baseSpeed, TYPE baseType)
         {
@@ -54,7 +58,12 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
-                return _baseHealth;
+                int result = _baseHealth;
+                if (IsEquiped)
+                {
+                    result += _currentEquipment.BonusHealth;
+                }
+                return result;
             }
         }
         /// <summary>
@@ -64,7 +73,12 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
-                return _baseAttack;
+                int result = _baseAttack;
+                if (IsEquiped)
+                {
+                    result += _currentEquipment.BonusAttack;
+                }
+                return result;
             }
         }
         /// <summary>
@@ -74,7 +88,12 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
-                return _baseDefense;
+                int result = _baseDefense;
+                if (IsEquiped)
+                {
+                    result += _currentEquipment.BonusDefense;
+                }
+                return result;
             }
         }
         /// <summary>
@@ -84,19 +103,25 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
-                return _baseSpeed;
+                int result = _baseSpeed;
+                if (IsEquiped)
+                {
+                    result += _currentEquipment.BonusSpeed;
+                }
+                return result;
             }
         }
         /// <summary>
         /// Equipement unique du personnage
         /// </summary>
-        public Equipment CurrentEquipment { get; private set; }
+        public Equipment CurrentEquipment { get => _currentEquipment; private set => _currentEquipment = value; }
         /// <summary>
         /// null si pas de status
         /// </summary>
         public StatusEffect CurrentStatus { get; private set; }
 
         public bool IsAlive => throw new NotImplementedException();
+        public bool IsEquiped => _currentEquipment != null;
 
 
         /// <summary>
@@ -117,14 +142,14 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// <exception cref="ArgumentNullException">Si equipement est null</exception>
         public void Equip(Equipment newEquipment)
         {
-            throw new NotImplementedException();
+            _currentEquipment = newEquipment;
         }
         /// <summary>
         /// Desequipe l'objet en cours au personnage
         /// </summary>
         public void Unequip()
         {
-            throw new NotImplementedException();
+            _currentEquipment = null;
         }
 
     }
