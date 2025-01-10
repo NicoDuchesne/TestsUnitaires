@@ -10,35 +10,35 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// <summary>
         /// Stat de base, HP
         /// </summary>
-        int _baseHealth;
+        private int _baseHealth;
         /// <summary>
         /// Stat de base, ATK
         /// </summary>
-        int _baseAttack;
+        private int _baseAttack;
         /// <summary>
         /// Stat de base, DEF
         /// </summary>
-        int _baseDefense;
+        private int _baseDefense;
         /// <summary>
         /// Stat de base, SPE
         /// </summary>
-        int _baseSpeed;
+        private int _baseSpeed;
         /// <summary>
         /// Type de base
         /// </summary>
-        TYPE _baseType;
+        private TYPE _baseType;
         /// <summary>
         /// Vie actuelle
         /// </summary>
-        int _currentHealth;
+        private int _currentHealth;
         /// <summary>
         /// Vie actuelle
         /// </summary>
-        Equipment _currentEquipment;
+        private Equipment _currentEquipment;
         /// <summary>
         /// Effet actuel
         /// </summary>
-        StatusEffect _currentStatus;
+        private StatusEffect _currentStatus;
 
         public Character(int baseHealth, int baseAttack, int baseDefense, int baseSpeed, TYPE baseType)
         {

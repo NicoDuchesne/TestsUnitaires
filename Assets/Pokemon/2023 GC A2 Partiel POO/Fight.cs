@@ -5,18 +5,26 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
 {
     public class Fight
     {
+        /// <summary>
+        /// Premier Pokemon
+        /// </summary>
+        private Character _character1;
+        /// <summary>
+        /// Premier Pokemon
+        /// </summary>
+        private Character _character2;
         public Fight(Character character1, Character character2)
         {
             Character1 = character1;
             Character2 = character2;
         }
 
-        public Character Character1 { get; }
-        public Character Character2 { get; }
+        public Character Character1 { get => _character1; private set => _character1 = value; }
+        public Character Character2 { get => _character2; private set => _character2 = value;  }
         /// <summary>
         /// Est-ce la condition de victoire/défaite a été rencontré ?
         /// </summary>
-        public bool IsFightFinished => throw new NotImplementedException();
+        public bool IsFightFinished => !_character1.IsAlive || !_character2.IsAlive;
 
         /// <summary>
         /// Jouer l'enchainement des attaques. Attention à bien gérer l'ordre des attaques par apport à la speed des personnages
