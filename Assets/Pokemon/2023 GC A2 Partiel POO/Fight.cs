@@ -38,7 +38,18 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// <exception cref="ArgumentNullException">si une des deux attaques est null</exception>
         public void ExecuteTurn(Skill skillFromCharacter1, Skill skillFromCharacter2)
         {
-            throw new NotImplementedException();
+            if(_character1.Speed >= _character2.Speed)
+            {
+                _character2.ReceiveAttack(skillFromCharacter1);
+                if (IsFightFinished) return;
+                _character1.ReceiveAttack(skillFromCharacter2);
+            } else
+            {
+                _character1.ReceiveAttack(skillFromCharacter2);
+                if (IsFightFinished) return;
+                _character2.ReceiveAttack(skillFromCharacter1);
+            }
+            if (IsFightFinished) return;
         }
 
     }
